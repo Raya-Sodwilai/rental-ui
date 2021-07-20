@@ -1,13 +1,30 @@
 import React from 'react';
 import './App.css';
-import Search from './search';
+import Search from './Search';
+
+import { Home } from './Home';
+import { HowItWorks } from './HowItWorks';
+import { Rent } from './Rent';
+import { Navigation } from './Navigation';
+
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 function App() {
   return (
+    <BrowserRouter>
     <div className="App">
       <h1>Luxury Purse Rentals</h1>
       <Search />
+
+      <Navigation/>
+
+      <Switch>
+        <Route path='/' component={Home} exact/>
+        <Route path='/howitworks' component={HowItWorks} exact/>
+        <Route path='/rent' component={Rent} exact/>
+      </Switch>
     </div>
+    </BrowserRouter>
   );
 }
 
