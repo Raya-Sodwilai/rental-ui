@@ -11,3 +11,34 @@
   white-space: nowrap;
   width: 1px;
 }
+
+.create-account {
+  border: 2px solid rgb(0, 0, 0);
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+  display: block;
+  margin: 15px;
+  width: 300px;
+  height: 230px;
+  box-sizing: border-box;
+  float: left;
+}
+
+.login {
+  border: 2px solid rgb(0, 0, 0);
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+  display: block;
+  margin: 15px;
+  width: 300px;
+  height: 230px;
+  box-sizing: border-box;
+  float: left;
+}
+
+.Signin {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
