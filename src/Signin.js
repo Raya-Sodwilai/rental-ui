@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Axios from "axios";
 
-export default function Signin() {
+export default function Signin(props) {
   const [firstNameReg, setFirstNameReq] = useState("");
   const [lastNameReg, setLastNameReq] = useState("");
   const [emailReg, setEmailReq] = useState("");
@@ -10,7 +10,7 @@ export default function Signin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [loginStatus, setLoginStatus] = useState("");
+  const {setLoggedUser} = props;
 
   Axios.defaults.withCredentials = true;
 
@@ -31,17 +31,17 @@ export default function Signin() {
       password: password,
     }).then((response) => {
       if (response.data.message){
-        setLoginStatus(response.data.message);
+        setLoggedUser(response.data.message);
       } else {
-        setLoginStatus(response.data[0].email);
+        setLoggedUser(response.data[0]);
       }
     });
   };
 
   useEffect(() => {
     Axios.get("http://localhost:3001/login").then((response) => {
-      if (response.data.loggedId == true) {
-        setLoginStatus(response.data.user[0].username);
+      if (response.data.loggedId === true) {
+        setLoggedUser(response.data.user[0].username);
       }
     });
   }, []);
@@ -99,8 +99,6 @@ export default function Signin() {
         />
         <button onClick={login}> Login </button>
       </div>
-
-      <h2>{loginStatus}</h2>
     </div>
   );
 }
