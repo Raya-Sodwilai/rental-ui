@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import Axios from "axios";
-import { Form, Col } from "react-bootstrap";
+import { Form, Col, Row, Button } from "react-bootstrap";
 
 export default function Signin(props) {
   const [firstNameReg, setFirstNameReq] = useState("");
@@ -53,61 +53,57 @@ export default function Signin(props) {
   return (
     <div className="Signin">
       <div className="create-account">
+      <h2>Create Account</h2>
         <Form>
-          <Form.Group as={Col} controlId="formGridFirstName">
-            <Form.Label>First Name</Form.Label>
-            <Form.Control type="text" onChange={(e) => {setFirstNameReq(e.target.value)}} />
+          <Row className="mb-3">
+            <Form.Group as={Col} controlId="formGridFirstName">
+              <Form.Label>First Name</Form.Label>
+              <Form.Control type="text" onChange={(e) => {setFirstNameReq(e.target.value)}} />
+            </Form.Group>
+
+            <Form.Group as={Col} controlId="formGridLastName">
+              <Form.Label>Last Name</Form.Label>
+              <Form.Control type="text" onChange={(e) => {setLastNameReq(e.target.value)}} />
+             </Form.Group>
+          </Row>
+  
+          <Form.Group className="mb-3" controlId="formGridEmail">
+            <Form.Label>Email</Form.Label>
+            <Form.Control type="text" onChange={(e) => {setEmailReq(e.target.value)}} />
           </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formGridPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="text" onChange={(e) => {setPasswordReq(e.target.value)}} />
+          </Form.Group>
+
+          <Button variant="primary" onClick={register}> Create </Button>
         </Form>
-        <h2>Create Account</h2>
-        <label>First Name</label>
-        <input 
-          type="text" 
-          onChange={(e) => {
-            setFirstNameReq(e.target.value);
-          }} 
-        />
-        <label>Last Name</label>
-        <input 
-          type="text" 
-          onChange={(e) => {
-            setLastNameReq(e.target.value);
-          }} 
-        />
-        <label>Email</label>
-        <input 
-          type="text" 
-          onChange={(e) => {
-            setEmailReq(e.target.value);
-          }} 
-        />
-        <label>Password</label>
-        <input 
-          type="text"
-          onChange={(e) => {
-            setPasswordReq(e.target.value);
-          }} 
-        />
-        <button onClick={register}> Create </button>
       </div>
 
       <div className="login">
         <h2>Login</h2>
-        <input 
-          type="text" 
-          placeholder="Email..." 
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }} 
-        />
-        <input 
-          type="password" 
-          placeholder="Password..."
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }} 
-        />
-        <button onClick={login}> Login </button>
+          <Form>
+            <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
+              <Form.Label column sm={2}>
+                Email
+              </Form.Label>
+              <Col sm={10}>
+                <Form.Control type="text" placeholder="Email..." onChange={(e) => {setEmail(e.target.value)}} />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword">
+              <Form.Label column sm={2}>
+                Password
+              </Form.Label>
+              <Col sm={10}>
+                <Form.Control type="password" placeholder="Password..." onChange={(e) => {setPassword(e.target.value)}} />
+              </Col>
+            </Form.Group>
+
+              <Button variant="primary" onClick={login}> Login </Button>
+          </Form>
       </div>
     </div>
   );

@@ -18,8 +18,8 @@
   background-color: rgb(255, 255, 255);
   display: block;
   margin: 15px;
-  width: 300px;
-  height: 230px;
+  width: 400px;
+  height: 375px;
   box-sizing: border-box;
   float: left;
 }
@@ -30,7 +30,7 @@
   background-color: rgb(255, 255, 255);
   display: block;
   margin: 15px;
-  width: 300px;
+  width: 500px;
   height: 230px;
   box-sizing: border-box;
   float: left;
