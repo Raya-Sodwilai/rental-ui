@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from "react-router-dom";
 import Axios from "axios";
+import { Form, Col } from "react-bootstrap";
 
 export default function Signin(props) {
   const [firstNameReg, setFirstNameReq] = useState("");
@@ -11,6 +13,7 @@ export default function Signin(props) {
   const [password, setPassword] = useState("");
 
   const {setLoggedUser} = props;
+  let history = useHistory();
 
   Axios.defaults.withCredentials = true;
 
@@ -34,6 +37,7 @@ export default function Signin(props) {
         setLoggedUser(response.data.message);
       } else {
         setLoggedUser(response.data[0]);
+        history.push('/')
       }
     });
   };
@@ -49,6 +53,12 @@ export default function Signin(props) {
   return (
     <div className="Signin">
       <div className="create-account">
+        <Form>
+          <Form.Group as={Col} controlId="formGridFirstName">
+            <Form.Label>First Name</Form.Label>
+            <Form.Control type="text" onChange={(e) => {setFirstNameReq(e.target.value)}} />
+          </Form.Group>
+        </Form>
         <h2>Create Account</h2>
         <label>First Name</label>
         <input 
