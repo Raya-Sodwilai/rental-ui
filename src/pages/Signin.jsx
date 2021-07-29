@@ -42,14 +42,6 @@ export default function Signin(props) {
     });
   };
 
-  useEffect(() => {
-    Axios.get("http://localhost:3001/login").then((response) => {
-      if (response.data.loggedId === true) {
-        setLoggedUser(response.data.user[0].username);
-      }
-    });
-  }, []);
-
   return (
     <div className="Signin">
       <div className="create-account">

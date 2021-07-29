@@ -2,7 +2,7 @@
   text-align: center;
 }
 
-.visually-hidden {
+/* .visually-hidden {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
   height: 1px;
@@ -10,7 +10,7 @@
   position: absolute;
   white-space: nowrap;
   width: 1px;
-}
+} */
 
 .create-account {
   border: 2px solid rgb(0, 0, 0);
@@ -54,13 +54,10 @@
 
 .posts {
   display: flex;
-  align-items: center;
   flex-direction: row;
-  width: 200px;
-  height: 200px;
-  margin-top: 100px;
+  margin-top: 50px;
 }
 
-.post h3 {
-  margin: 20px;
+#nav-dropdown-dark-example {
+  transform: top;
 }

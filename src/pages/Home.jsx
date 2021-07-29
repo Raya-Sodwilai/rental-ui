@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Card, ListGroup, ListGroupItem, Row, Col } from 'react-bootstrap';
 import Axios from "axios";
 
 function Home(props) {

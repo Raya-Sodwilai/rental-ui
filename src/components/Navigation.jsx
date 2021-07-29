@@ -1,13 +1,27 @@
 import React, { useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
+import Axios from "axios";
 
 const Navigation = (props) => {
-    const loggedUser = props.loggedUser;
+    const {loggedUser, setLoggedUser} = props;
     let history = useHistory();
 
     const addRental = () => {
       history.push('/add-rental');
+    };
+
+    const reservations = () => {
+      history.push('/reservations');
+    };
+
+    const logout = () => {
+      Axios.get("http://localhost:3001/logout").then((res) => {
+        if (res.status == 200){
+          setLoggedUser(null);
+          history.push('/');
+        }
+      });
     };
 
     return(
@@ -31,10 +45,10 @@ const Navigation = (props) => {
                   </NavLink>}
                   {loggedUser != null && 
                   <NavDropdown
-                    id="nav-dropdown-dark-example" title="Profile" menuVariant="dark" to="/profile" >
+                    id="nav-dropdown-dark-example" title={loggedUser.firstName} menuVariant="dark" to="/profile" >
                     <NavDropdown.Item onClick={addRental}>Add Rental</NavDropdown.Item>
-                    <NavDropdown.Item href="#reservations">Reservations</NavDropdown.Item>
-                    <NavDropdown.Item href="#logout">Log Out</NavDropdown.Item>
+                    <NavDropdown.Item onClick={reservations}>Reservations</NavDropdown.Item>
+                    <NavDropdown.Item onClick={logout}>Log Out</NavDropdown.Item>
                   </NavDropdown>}
                 </Nav>
             </Navbar.Collapse>

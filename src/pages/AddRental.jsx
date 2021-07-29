@@ -1,8 +1,8 @@
-import "./App.css";
+import "../App.css";
 import Axios from "axios";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Form, Row, Col, Button, InputGroup } from "react-bootstrap";
+import { Form, Row, Col, Button } from "react-bootstrap";
 
 function AddRental(props) {
   const [brand, setBrand] = useState("");
@@ -12,15 +12,24 @@ function AddRental(props) {
   const [description, setDescription] = useState("");
   const [biweeklyPrice, setBiweeklyPrice] = useState(0);
   const [monthlyPrice, setMonthlyPrice] = useState(0);
+  const [image, setImage] = useState(null);
 
   const[postList, setPostList] = useState([]);
   const {loggedUser} = props;
   let history = useHistory();
   
+  const imageHandler = (event) => {
+    const file = event.target.files[0];
+    const formData = new FormData();
+    formData.append('image', file);
+
+    Axios.post('http://localhost:3001/users/:userId/')
+  }
 
   const addRental = () => {
     Axios.post("http://localhost:3001/users/:userId/posts", {
       userId: loggedUser.id,
+      image: image,
       brand: brand,
       size: size,
       material: material,
@@ -32,6 +41,7 @@ function AddRental(props) {
       setPostList([
         ...postList,
         {
+          image: image,
           brand: brand,
           size: size,
           material: material,
@@ -117,7 +127,7 @@ function AddRental(props) {
             Add Pictures
           </Form.Label>
           <Col sm={6}>
-            <Form.Control type="file" multiple />
+            <Form.Control type="file" accept="image/*" multiple={false} onChange={(event) => setImage(event.target.value)} />
           </Col>
         </Form.Group>
 
