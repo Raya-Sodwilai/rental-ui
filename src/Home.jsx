@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
 import Axios from "axios";
 
 function Home(props) {
@@ -17,13 +18,18 @@ function Home(props) {
         return (
           <div className="post">
             <div>
-              <h4>Brand: {val.brand}</h4>
-              <h4>Size: {val.size}</h4>
-              <h4>Material: {val.material}</h4>
-              <h4>Color: {val.color}</h4>
-              <h4>Description: {val.description}</h4>
-              <h4>Biweekly Price: {val.biweekly_price}</h4>
-              <h4>Monthly Price: {val.monthly_price}</h4>
+            <Card style={{ width: '16rem' }}>
+              <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
+              <ListGroup className="list-group-flush">
+                <ListGroupItem>Brand: {val.brand}</ListGroupItem>
+                <ListGroupItem>Size: {val.size}</ListGroupItem>
+                <ListGroupItem>Material: {val.material}</ListGroupItem>
+                <ListGroupItem>Color: {val.color}</ListGroupItem>
+                <ListGroupItem>Description: {val.description}</ListGroupItem>
+                <ListGroupItem>Biweekly Price: {val.biweekly_price}</ListGroupItem>
+                <ListGroupItem>Monthly Price: {val.monthly_price}</ListGroupItem>
+              </ListGroup>
+            </Card>
             </div>
           </div>
         );
