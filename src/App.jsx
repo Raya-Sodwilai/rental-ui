@@ -8,6 +8,7 @@ import Navigation from './Navigation';
 import './App.css';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import AddRental from './AddRental';
 
 function App() {
   const [loggedUser, setLoggedUser] = useState(null);
@@ -26,6 +27,7 @@ function App() {
         <Route path='/about' exact render={(props) => <About />} />
         <Route path='/signin' exact render={(props) => <Signin setLoggedUser={setLoggedUser} />} />
         <Route path='/profile' exact render={(props) => <Profile loggedUser={loggedUser} authorize={true} />} />
+        <Route path='/add-rental' exact render={(props) => <AddRental loggedUser={loggedUser} authorize={true} />} />
       </Switch>
 
     </div>

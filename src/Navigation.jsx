@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
 
 const Navigation = (props) => {
     const loggedUser = props.loggedUser;
+    let history = useHistory();
+
+    const addRental = () => {
+      history.push('/add-rental');
+    };
 
     return(
         <Navbar variant="dark" bg="dark" expand="lg">
@@ -27,7 +32,8 @@ const Navigation = (props) => {
                   {loggedUser != null && 
                   <NavDropdown
                     id="nav-dropdown-dark-example" title="Profile" menuVariant="dark" to="/profile" >
-                    <NavDropdown.Item href="#rentals/reservations">Rentals/Reservations</NavDropdown.Item>
+                    <NavDropdown.Item onClick={addRental}>Add Rental</NavDropdown.Item>
+                    <NavDropdown.Item href="#reservations">Reservations</NavDropdown.Item>
                     <NavDropdown.Item href="#logout">Log Out</NavDropdown.Item>
                   </NavDropdown>}
                 </Nav>
