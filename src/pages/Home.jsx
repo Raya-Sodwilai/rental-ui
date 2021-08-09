@@ -13,11 +13,10 @@ function Home(props) {
   }, []);
 
   return (
-    <div className="posts">
+    <div className="container">
       {rentals.map((val, key) => {
         return (
-          <div className="post">
-            <div>
+          <div className="column">
             <Card style={{ width: '16rem' }}>
               <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
               <ListGroup className="list-group-flush">
@@ -30,7 +29,6 @@ function Home(props) {
                 <ListGroupItem>Monthly Price: {val.monthly_price}</ListGroupItem>
               </ListGroup>
             </Card>
-            </div>
           </div>
         );
       })} 

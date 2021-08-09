@@ -1,4 +1,4 @@
-import { Form, InputGroup, Button, FormControl } from "react-bootstrap";
+import { Form, Button, FormControl, Row, Col } from "react-bootstrap";
 
 const Search = () => {
   return <div>Luxury Purse Rentals</div>
@@ -6,21 +6,16 @@ const Search = () => {
 
 const SearchBar = () => (
   <Form action="/" method="get">
-    <InputGroup className="mb-3">
-      <Form.Label className="visually-hidden">
-        Find Your Purse
-      </Form.Label>
-      <FormControl
-        type="text" 
-        id="header-search" 
-        placeholder="Find Your Purse"
-        aria-describedby="basic-addon2"
-      />
-
-      <Button variant="outline-secondary" id="button-addon2" type="submit">
-        Search
-      </Button>
-    </InputGroup>
+    <Row>
+      <Col xs={{span: 2, offset: 9}}>
+        <FormControl type="text" id="header-search" aria-describedby="basic-addon2" />
+      </Col>
+      <Col xs={1}>
+        <Button className="butn" id="button-addon2" type="submit">
+          Search
+        </Button>
+      </Col>
+    </Row>
   </Form>
 );
 

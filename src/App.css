@@ -1,8 +1,40 @@
 .App {
+  color: #BC986A;
   text-align: center;
 }
 
-/* .visually-hidden {
+.color-nav {
+  background-color: #DAAD86;
+  margin-top: 10px;
+}
+
+.justify-content-end {
+  margin-right: 5px
+}
+
+.element.style {
+  padding-right: 0px;
+}
+
+.col-1 {
+  padding-left: 0px;
+}
+
+.butn { 
+  background-color: #BC986A; 
+  border: 2px solid #BC986A; 
+  border-radius: 4px; 
+  color: #ffff;  
+  text-decoration: none; 
+} 
+
+.butn:hover { 
+  background: #BC986A;
+  border: 2px solid #BC986A; 
+  text-decoration: none; 
+}
+
+.visually-hidden {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
   height: 1px;
@@ -10,12 +42,16 @@
   position: absolute;
   white-space: nowrap;
   width: 1px;
-} */
+}
+
+h2.header {
+  text-align: center;
+}
 
 .create-account {
-  border: 2px solid rgb(0, 0, 0);
+  border: 2px solid #BC986A;
   padding: 10px;
-  background-color: rgb(255, 255, 255);
+  background-color: #ffffff;
   display: block;
   margin: 15px;
   width: 400px;
@@ -25,9 +61,9 @@
 }
 
 .login {
-  border: 2px solid rgb(0, 0, 0);
+  border: 2px solid #BC986A;
   padding: 10px;
-  background-color: rgb(255, 255, 255);
+  background-color: #ffffff;
   display: block;
   margin: 15px;
   width: 500px;
@@ -37,6 +73,7 @@
 }
 
 .Signin {
+  color: #DAAD86;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -44,6 +81,7 @@
 }
 
 .information {
+  text-align: left;
   padding: 10px;
   display: block;
   margin: 15px;
@@ -52,12 +90,42 @@
   float: left;
 }
 
-.posts {
-  display: flex;
-  flex-direction: row;
-  margin-top: 50px;
+.column {
+  border: 2px solid rgb(255, 255, 255);
+  padding: 20px;
+  background-color: #BC986A;
+  display: block;
+  margin: 15px;
+  width: 300px;
+  height: 600px;
+  box-sizing: border-box;
+  float: left;
+  text-align: left;
 }
 
-#nav-dropdown-dark-example {
-  transform: top;
+.images {
+  padding: 10px;
+  display: block;
+  margin: 15px;
+  width: 550px;
+  height: 480px;
+  float: left;
+}
+
+.dropdown-menu.show {
+  position: absolute;
+  right: -15px;
+  background-color: #DAAD86;
+}
+
+.dropdown-menu.show:hover {
+  background: #BC986A;
+}
+
+.dropdown-item:hover {
+  background-color: #DAAD86;
+}
+
+.header {
+  color: #BC986A;
 }

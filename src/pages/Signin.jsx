@@ -45,7 +45,7 @@ export default function Signin(props) {
   return (
     <div className="Signin">
       <div className="create-account">
-      <h2>Create Account</h2>
+      <h2 className="header">Create Account</h2>
         <Form>
           <Row className="mb-3">
             <Form.Group as={Col} controlId="formGridFirstName">
@@ -61,7 +61,7 @@ export default function Signin(props) {
   
           <Form.Group className="mb-3" controlId="formGridEmail">
             <Form.Label>Email</Form.Label>
-            <Form.Control type="text" onChange={(e) => {setEmailReq(e.target.value)}} />
+            <Form.Control type="text" placeholder="Ex.johndoe@luxury.com" onChange={(e) => {setEmailReq(e.target.value)}} />
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formGridPassword">
@@ -69,19 +69,21 @@ export default function Signin(props) {
             <Form.Control type="text" onChange={(e) => {setPasswordReq(e.target.value)}} />
           </Form.Group>
 
-          <Button variant="primary" onClick={register}> Create </Button>
+          <div className="text-center">
+            <Button className="butn" onClick={register}> Create </Button>
+          </div>
         </Form>
       </div>
 
       <div className="login">
-        <h2>Login</h2>
+        <h2 className="header">Login</h2>
           <Form>
             <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
               <Form.Label column sm={2}>
                 Email
               </Form.Label>
               <Col sm={10}>
-                <Form.Control type="text" placeholder="Email..." onChange={(e) => {setEmail(e.target.value)}} />
+                <Form.Control type="text" placeholder="Ex.johndoe@luxury.com" onChange={(e) => {setEmail(e.target.value)}} />
               </Col>
             </Form.Group>
 
@@ -90,11 +92,13 @@ export default function Signin(props) {
                 Password
               </Form.Label>
               <Col sm={10}>
-                <Form.Control type="password" placeholder="Password..." onChange={(e) => {setPassword(e.target.value)}} />
+                <Form.Control type="password"  onChange={(e) => {setPassword(e.target.value)}} />
               </Col>
             </Form.Group>
 
-              <Button variant="primary" onClick={login}> Login </Button>
+            <div className="text-center">
+              <Button className="butn" onClick={login}> Login </Button>
+            </div>
           </Form>
       </div>
     </div>
