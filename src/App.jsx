@@ -11,6 +11,7 @@ import './App.css';
 import Axios from "axios";
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import RentalDetail from './pages/RentalDetail';
 
 function App() {
   const [loggedUser, setLoggedUser] = useState(null);
@@ -40,6 +41,7 @@ function App() {
         <Route path='/profile' exact render={(props) => <Profile loggedUser={loggedUser} />} />
         <Route path='/add-rental' exact render={(props) => <AddRental loggedUser={loggedUser} authorize={true} />} />
         <Route path='/reservations' exact render={(props) => <Reservations />} />
+        <Route path='/rental-detail' exact render={(props) => <RentalDetail />} />
       </Switch>
 
     </div>
