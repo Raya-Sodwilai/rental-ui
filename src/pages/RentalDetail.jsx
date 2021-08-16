@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useLocation } from 'react-router-dom';
-import Axios from "axios";
+import { Card, Carousel, Container } from 'react-bootstrap';
 
 function RentalDetail(props) {
   const[rental, setRental] = useState({});
@@ -12,28 +12,29 @@ function RentalDetail(props) {
   });
 
   return (
-    <div>
-      <div className="detail-card mb-3">
-        <div className="row g-0">
-          <div className="col-md-7">
-          { rental.images ?  <img className="rental-detail-img" src={'http://localhost:3001/' + rental.images[0]} /> :
-              <img className="rental-detail-img" src="holder.js/100px180?text=Image cap" />}
-          </div>
-        </div>
-        <div class="col-md-5">
-          <div class="card-body-detail">
-            <p>Brand: {rental.brand}</p>
-            <p>Size: {rental.size}</p>
-            <p>Material: {rental.material}</p>
-            <p>Color: {rental.color}</p>
-            <p>Description: {rental.description}</p>
-            <p>Biweekly Price: {rental.biweekly_price}</p>
-            <p>Monthly Price: {rental.monthly_price}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
+    <Container>
+      <Carousel className='carousel-wrapper'>
+        { rental.images ? rental.images.map((image) => {
+            return (
+              <Carousel.Item interval={5000}>
+                <img className="d-block w-100" src={'http://localhost:3001/' + image} /> 
+              </Carousel.Item>
+            )
+          }) :
+          <img variant="top" src="holder.js/100px160" />
+        }
+      </Carousel>
+      <Card className="card-body-detail">
+        <Card.Body>Brand: {rental.brand}</Card.Body>
+          <Card.Body>Size: {rental.size}</Card.Body>
+          <Card.Body>Material: {rental.material}</Card.Body>
+          <Card.Body>Color: {rental.color}</Card.Body>
+          <Card.Body>Description: {rental.description}</Card.Body>
+          <Card.Body>Biweekly Price: {rental.biweekly_price}</Card.Body>
+          <Card.Body>Monthly Price: {rental.monthly_price}</Card.Body>
+      </Card>
+    </Container>
+  );
 }
 
 export default RentalDetail;

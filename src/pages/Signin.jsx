@@ -8,12 +8,19 @@ export default function Signin(props) {
   const [lastNameReg, setLastNameReq] = useState("");
   const [emailReg, setEmailReq] = useState("");
   const [passwordReg, setPasswordReq] = useState("");
+  const [nextPage, setNextPage] = useState(false);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const {setLoggedUser} = props;
   let history = useHistory();
+
+  const handleNextPage = () => {
+    setNextPage(true);
+
+    login();
+  }
 
   Axios.defaults.withCredentials = true;
 
@@ -44,6 +51,7 @@ export default function Signin(props) {
 
   return (
     <div className="Signin">
+      {!nextPage && (
       <div className="create-account">
       <h2 className="header">Create Account</h2>
         <Form>
@@ -71,10 +79,15 @@ export default function Signin(props) {
 
           <div className="text-center">
             <Button className="butn" onClick={register}> Create </Button>
+            <h5 className="already-resgistered">
+              Already registered <a className="already-resgistered-signin" onClick={handleNextPage}>sign in?</a>
+            </h5>
           </div>
         </Form>
       </div>
+      )}
 
+      {nextPage && (
       <div className="login">
         <h2 className="header">Login</h2>
           <Form>
@@ -101,6 +114,7 @@ export default function Signin(props) {
             </div>
           </Form>
       </div>
+      )}
     </div>
   );
 }

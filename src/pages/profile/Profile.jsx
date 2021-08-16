@@ -1,44 +1,62 @@
 import React, { useState, useEffect } from 'react';
-import { Card, ListGroup, ListGroupItem, Image } from 'react-bootstrap';
-import { getAllRentalsForUSer } from './api';
+import { isValidElement } from 'react';
+import { getAllRentalsForUser, deleteRental, editRental } from './api';
+import { Card, CardColumns } from 'react-bootstrap';
 
 function Profile(props) {
   const [state, setState] = useState('');
-  const[userRentals, setUserRentalList] = useState([]);
+  const [userRentals, setUserRentalList] = useState([]);
   const [hasError, setHasError] = useState(false);
+  const [newRental, setNewRental] = useState("");
   const { loggedUser } = props;
 
   useEffect(() => {
-    getAllRentalsForUSer(loggedUser.id).then((response) => {
+    getAllRentalsForUser(loggedUser.id).then((response) => {
       setUserRentalList(response.data);
     }).catch(err => setHasError(true));
   }, []);
 
+  const handleDeleteRental = (userId, rentalId) => {
+    deleteRental(userId, rentalId).then(() => {
+      const newUserRentalList = userRentals.filter(obj => obj.id !== rentalId);
+
+      setUserRentalList(newUserRentalList);
+    });
+  };
+
   return (
-    <div className="container">
+    <div>
       {userRentals.map((val, key) => {
         return (
-          <div className="column">
-            <div>
-            <Card style={{ width: '16rem' }}>
-              { val.images ? <Card.Img variant="top" src={'http://localhost:3001/' + val.images[0]} /> :
-              <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />}
-              <ListGroup className="list-group-flush">
-                <ListGroupItem>Brand: {val.brand}</ListGroupItem>
-                <ListGroupItem>Size: {val.size}</ListGroupItem>
-                <ListGroupItem>Material: {val.material}</ListGroupItem>
-                <ListGroupItem>Color: {val.color}</ListGroupItem>
-                <ListGroupItem>Description: {val.description}</ListGroupItem>
-                <ListGroupItem>Biweekly Price: {val.biweekly_price}</ListGroupItem>
-                <ListGroupItem>Monthly Price: {val.monthly_price}</ListGroupItem>
-              </ListGroup>
+          <CardColumns>
+            <Card className="profile-card">
+              { val.images ?  <img className="profile-card-img" variant="top" src={'http://localhost:3001/' + val.images[0]} /> :
+              <Card.Img className="profile-card-img" variant="top" src="holder.js/100px160" />}
+              <Card.Body>
+                <Card.Title>{val.brand}</Card.Title>
+                <Card.Text className="profile-card-detail">
+                  <p>Brand: {val.brand}</p>
+                  <p>Size: {val.size}</p>
+                  <p>Material: {val.material}</p>
+                  <p>Color: {val.color}</p>
+                  <p>Description: {val.description}</p>
+                  <p>Biweekly Price: {val.biweekly_price}</p>
+                  <p>Monthly Price: {val.monthly_price}</p>
+
+                  <button className="butn" onClick={() => {
+                    handleDeleteRental(loggedUser.id, val.id);
+                    }}
+                    >
+                      Delete
+                  </button>
+                </Card.Text>
+              </Card.Body>
             </Card>
-            </div>
-          </div>
+          </CardColumns>
         );
-      })} 
+      })}
     </div>
-  )
+  );
 }
 
 export default Profile;

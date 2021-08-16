@@ -21,7 +21,7 @@ export const createRental = ({
   biweeklyPrice,
   monthlyPrice,
 }) => {
-  return Axios.post("http://localhost:3001/users/:userId/posts", {
+  return Axios.post("http://localhost:3001/users/:userId/rentals", {
     userId: userId,
     brand: brand,
     size: size,
