@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { isValidElement } from 'react';
 import { getAllRentalsForUser, deleteRental, editRental } from './api';
-import { Card, CardColumns } from 'react-bootstrap';
+import DeleteModal from '../../components/DeleteModal';
+import EditModal from '../../components/EditModal';
+import { Card, CardColumns, Modal } from 'react-bootstrap';
 
 function Profile(props) {
-  const [state, setState] = useState('');
   const [userRentals, setUserRentalList] = useState([]);
   const [hasError, setHasError] = useState(false);
-  const [newRental, setNewRental] = useState("");
+  const [activeDeleteModal, setActiveDeleteModal] = useState('');
+  const [activeEditModal, setActiveEditModal] = useState('');
   const { loggedUser } = props;
+
+  const deleteClickHandler = (e, index) => setActiveDeleteModal(index);
+  const hideActiveDeleteModal = () => setActiveDeleteModal('');
+  const editClickHandler = (e, index) => setActiveEditModal(index);
+  const hideActiveEditModal = () => setActiveEditModal('');
 
   useEffect(() => {
     getAllRentalsForUser(loggedUser.id).then((response) => {
@@ -16,39 +22,62 @@ function Profile(props) {
     }).catch(err => setHasError(true));
   }, []);
 
+
   const handleDeleteRental = (userId, rentalId) => {
     deleteRental(userId, rentalId).then(() => {
       const newUserRentalList = userRentals.filter(obj => obj.id !== rentalId);
-
       setUserRentalList(newUserRentalList);
+      hideActiveDeleteModal();
+    });
+  };
+
+  const handleEditRental = (userId, rentalId, updatedRental) => {
+    editRental(userId, rentalId, updatedRental).then(() => {
+      const newUserRentalList = userRentals.map(r => {
+        if (r.id === rentalId) {
+          return {...r, ...updatedRental}
+        }
+        else {
+          return r;
+        }
+      });
+      setUserRentalList(newUserRentalList);
+      hideActiveEditModal();
     });
   };
 
   return (
     <div>
-      {userRentals.map((val, key) => {
+      {userRentals.map((rental, index) => {
         return (
           <CardColumns>
             <Card className="profile-card">
-              { val.images ?  <img className="profile-card-img" variant="top" src={'http://localhost:3001/' + val.images[0]} /> :
+              { rental.images ?  <img className="profile-card-img" variant="top" src={'http://localhost:3001/' + rental.images[0]} /> :
               <Card.Img className="profile-card-img" variant="top" src="holder.js/100px160" />}
               <Card.Body>
-                <Card.Title>{val.brand}</Card.Title>
+                <Card.Title>{rental.brand}</Card.Title>
                 <Card.Text className="profile-card-detail">
-                  <p>Brand: {val.brand}</p>
-                  <p>Size: {val.size}</p>
-                  <p>Material: {val.material}</p>
-                  <p>Color: {val.color}</p>
-                  <p>Description: {val.description}</p>
-                  <p>Biweekly Price: {val.biweekly_price}</p>
-                  <p>Monthly Price: {val.monthly_price}</p>
+                  <p>Brand: {rental.brand}</p>
+                  <p>Size: {rental.size}</p>
+                  <p>Material: {rental.material}</p>
+                  <p>Color: {rental.color}</p>
+                  <p>Description: {rental.description}</p>
+                  <p>Biweekly Price: {rental.biweekly_price}</p>
+                  <p>Monthly Price: {rental.monthly_price}</p>
 
-                  <button className="butn" onClick={() => {
-                    handleDeleteRental(loggedUser.id, val.id);
-                    }}
-                    >
-                      Delete
+                  
+                  <button className="edit-butn" onClick={(e) => editClickHandler(e, index)}>
+                    Edit
                   </button>
+
+                  <button className="delete-butn" onClick={(e) => deleteClickHandler(e, index)}>
+                    Delete
+                  </button>
+                  
+              
+                  <DeleteModal id={index} handleDeleteRental={() => handleDeleteRental(loggedUser.id, rental.id)} show={activeDeleteModal === index} onHide={hideActiveDeleteModal} />
+                  <EditModal id={index} rental={rental} userId={loggedUser.id} handleEditRental={handleEditRental} show={activeEditModal === index} onHide={hideActiveEditModal} />
+
                 </Card.Text>
               </Card.Body>
             </Card>

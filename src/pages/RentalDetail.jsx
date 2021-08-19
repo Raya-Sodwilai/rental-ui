@@ -24,6 +24,8 @@ function RentalDetail(props) {
           <img variant="top" src="holder.js/100px160" />
         }
       </Carousel>
+      
+      <Card.Title className="title">{rental.brand}</Card.Title>
       <Card className="card-body-detail">
         <Card.Body>Brand: {rental.brand}</Card.Body>
           <Card.Body>Size: {rental.size}</Card.Body>

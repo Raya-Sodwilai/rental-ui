@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Axios from 'axios';
 import About from './pages/About';
 import Search from './components/Search';
 import Signin from './pages/Signin';
@@ -7,11 +9,8 @@ import Home from './pages/Home';
 import Navigation from './components/Navigation';
 import AddRental from './pages/add-rental/AddRental';
 import Reservations from './pages/Reservations';
-import './App.css';
-import Axios from "axios";
-
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import RentalDetail from './pages/RentalDetail';
+import './App.css';
 
 function App() {
   const [loggedUser, setLoggedUser] = useState(null);

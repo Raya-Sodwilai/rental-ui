@@ -3,6 +3,7 @@
   text-align: center;
 }
 
+
 /* Nav Bar  */
 .color-nav {
   background-color: #DAAD86;
@@ -20,6 +21,7 @@
 .col-1 {
   padding-left: 0px;
 }
+
 
 /* Buttons */
 .butn { 
@@ -49,6 +51,7 @@
 h2.header {
   text-align: center;
 }
+
 
 /* Registration */
 .create-account {
@@ -86,6 +89,7 @@ h2.header {
   justify-content: center;
 }
 
+
 /* Add Rentals Page */
 .information {
   text-align: left;
@@ -97,17 +101,18 @@ h2.header {
   float: left;
 }
 
+
 /* Home Page */
 .card {
-  border: 2px solid #BC986A;
+  border: 2px solid #DAAD86;
   display: flex;
   max-width: 50%;
   float: left;
-  margin: 90px;
+  margin: 85px;
 }
 
 .item-img {
-  width: 150px;
+  width: 170px;
   height: 220px;
 }
 
@@ -157,9 +162,18 @@ h2.header {
   width: 300px;
 }
 
+.title {
+  float: right;
+  position: absolute;
+  top: 220px;
+  right: 430px;
+  font-size: 50px;
+}
+
 .sr-only {
   color: #BC986A;
 }
+
 
 /* Profile Page */
 .profile-card {
@@ -169,7 +183,7 @@ h2.header {
 }
 
 .profile-card-img {
-  width: 290px;
+  width: 295px;
   height: 300px;
 }
 
@@ -177,6 +191,48 @@ h2.header {
   display: block;
   text-align: left;
 }
+
+.delete {
+  color: #BC986A;
+}
+
+.edit {
+  color: #BC986A;
+}
+
+.edit-text {
+  align-items: right;
+}
+
+.edit-butn {
+  background-color: #DAAD86; 
+  border: 2px solid #DAAD86; 
+  border-radius: 4px; 
+  color: #ffff;  
+  text-decoration: none; 
+  margin-right: 155px;
+}
+
+.edit-butn:hover {
+  background: #BC986A;
+  border: 2px solid #BC986A; 
+  text-decoration: none; 
+}
+
+.delete-butn {
+  background-color: #8D8741; 
+  border: 2px solid #8D8741; 
+  border-radius: 4px; 
+  color: #ffff;  
+  text-decoration: none; 
+}
+
+.delete-butn:hover {
+  background: #BC986A;
+  border: 2px solid #BC986A; 
+  text-decoration: none; 
+}
+
 
 /* Nav Bar Dropdown */
 .dropdown-menu.show {
@@ -197,7 +253,8 @@ h2.header {
   color: #BC986A;
 }
 
-/* // Already Resgistered */
+
+/* Already Resgistered */
 .already-resgistered {
   text-align: right;
   font-size: 13px;
