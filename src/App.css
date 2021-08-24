@@ -166,8 +166,9 @@ h2.header {
   float: right;
   position: absolute;
   top: 220px;
-  right: 430px;
+  right: 215px;
   font-size: 50px;
+  color:#8D8741;
 }
 
 .sr-only {
@@ -233,6 +234,10 @@ h2.header {
   text-decoration: none; 
 }
 
+.edit-images {
+  width: 150px;
+  height: 150px;
+}
 
 /* Nav Bar Dropdown */
 .dropdown-menu.show {
@@ -259,7 +264,7 @@ h2.header {
   text-align: right;
   font-size: 13px;
   padding-top: 10px;
-  color: #BC986A;
+  color: #8D8741;
   margin: 0;
 }
 

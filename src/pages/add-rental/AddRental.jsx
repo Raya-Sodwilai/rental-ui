@@ -13,7 +13,7 @@ function AddRental(props) {
   const [description, setDescription] = useState("");
   const [biweeklyPrice, setBiweeklyPrice] = useState(0);
   const [monthlyPrice, setMonthlyPrice] = useState(0);
-  const [images, setImages] = useState(new FormData());
+  const [images, setImages] = useState([]);
   const [nextStatus, setNextStatus] = useState(false);
   const [postList, setPostList] = useState([]);
   const [rentalId, setRentalId] = useState(null);
@@ -31,15 +31,29 @@ function AddRental(props) {
     addRental();
   };
 
-  const imageHandler = (files) => {
+  const imageHandler = () => {
     const formData = new FormData();
 
-    for (var i = 0; i < files.length; i++) {
-      formData.append(`files`, files[i]);
+    for (var i = 0; i < images.length; i++) {
+      formData.append(`files`, images[i]);
     }
 
-    imageUpload(formData, rentalId);
+    imageUpload(formData, rentalId).then((res) => {
+        profile();
+    }, (err) => {
+      console.log('err', err);
+    });
   };
+
+  const displayImages = () => {
+    const imageHtmlElems = [];
+
+    for (let i = 0; i < images.length; i++) {
+      imageHtmlElems.push(<img className="edit-images" src={URL.createObjectURL(images[i])} />)
+    }
+
+    return imageHtmlElems;
+  }
 
   const addRental = () => {
     const bodyRequest = {
@@ -222,17 +236,20 @@ function AddRental(props) {
               <Col sm={6}>
                 <Form.Control
                   type="file"
-                  accept="image/*"
+                  accept=".jpg, .jpeg"
                   name="sampleFile"
                   multiple={true}
-                  onChange={(e) => imageHandler(e.target.files)}
+                  onChange={(e) => setImages(e.target.files)}
                 />
               </Col>
             </Form.Group>
+            <div>
+              {images.length && displayImages()}
+            </div>
 
             <Form.Group as={Row} className="mb-3">
               <Col sm={{ span: 6, offset: 5 }}>
-                <Button className="butn" onClick={profile}>Create</Button>
+                <Button className="butn" onClick={imageHandler}>Create</Button>
               </Col>
             </Form.Group>
           </Form>

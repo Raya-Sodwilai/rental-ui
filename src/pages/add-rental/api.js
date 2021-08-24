@@ -1,7 +1,7 @@
 import Axios from "axios";
 
 export const imageUpload = (formData, rentalId) => {
-  Axios.post(`http://localhost:3001/upload`, formData, {
+  return Axios.post(`http://localhost:3001/upload`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },

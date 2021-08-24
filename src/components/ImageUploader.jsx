@@ -1,7 +1,11 @@
-const ImageUploader = (event) => {
+import React from 'react';
+import { useState } from "react";
+
+function ImageUploader(event) {
+  const [previewVisible, setPreviewVisible] = useState(false);
+  const [previewImage, setPreviewImage] = useState('');
+  const [fileList ]
   const file = event.target.files[0];
-  const formData = new FormData();
-  formData.append('image', file);
 
   return (
     <div className="image">
@@ -9,3 +13,5 @@ const ImageUploader = (event) => {
     </div>
   )
 }
+
+export default ImageUploader;

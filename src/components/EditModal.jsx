@@ -10,6 +10,7 @@ function EditModal(props) {
   const [description, setDescription] = useState(props.rental.description);
   const [biweeklyPrice, setBiweeklyPrice] = useState(props.rental.biweekly_price);
   const [monthlyPrice, setMonthlyPrice] = useState(props.rental.monthly_price);
+  const [images, setImages] = useState(new FormData());
 
   const handleUpdate = () => {
     const updatedRental = {
@@ -94,6 +95,17 @@ function EditModal(props) {
               <FormControl type="text" defaultValue={props.rental.monthly_price} onChange={(e) => setMonthlyPrice(e.target.value)} />
             </Col>
           </Form.Group>
+          
+          <div>
+          { props.rental.images ? props.rental.images.map((image) => {
+              return (
+                <img className="edit-images" src={'http://localhost:3001/' + image} /> 
+              )
+            }) :
+            <img src="holder.js/100px160" />
+          }
+          </div>
+            
         </Form>
       </Modal.Body>
       <Modal.Footer>
