@@ -27,3 +27,7 @@ export const editRental = (userId, rentalId, {
     monthly_price
     });
 };
+
+export const deleteImage = (imageId, rentalId) => {
+  return Axios.delete(`http://localhost:3001/rentals/${rentalId}/images/${imageId}`);
+};

@@ -1,9 +1,9 @@
 import "../../App.css";
-import Axios from "axios";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import { imageUpload, createRental } from "./api";
+import ImageUploader from '../../components/ImageUploader';
 
 function AddRental(props) {
   const [brand, setBrand] = useState("");
@@ -21,39 +21,59 @@ function AddRental(props) {
   const { loggedUser } = props;
   let history = useHistory();
   
-  const profile = () => {
+  const redirectToProfile = () => {
     history.push('/profile');
   };
 
   const handleNextStatus = () => {
     setNextStatus(true);
-
-    addRental();
   };
 
-  const imageHandler = () => {
+  const handleNewImagesDelete = (index) => {
+    const updatedNewImages = [...images];
+    updatedNewImages.splice(index, 1);
+    
+    setImages(updatedNewImages);
+  };
+
+  const handleCreateRental = () => {
+   return addRental().then(res => {
+    if (res) {
+      setRentalId(res.data.insertId);
+
+      return imageHandler(res.data.insertId).then(res => {
+        setPostList([
+          ...postList,
+          {
+            brand: brand,
+            size: size,
+            material: material,
+            color: color,
+            description: description,
+            biweeklyPrice: biweeklyPrice,
+            monthlyPrice: monthlyPrice,
+          },
+        ]);
+
+        redirectToProfile();
+      }, err => {
+        console.log('err', err);
+      });
+    }
+    }, err => {
+      console.log('err', err);
+    });
+  }
+
+  const imageHandler = (newRentalId) => {
     const formData = new FormData();
 
     for (var i = 0; i < images.length; i++) {
       formData.append(`files`, images[i]);
     }
 
-    imageUpload(formData, rentalId).then((res) => {
-        profile();
-    }, (err) => {
-      console.log('err', err);
-    });
+    return imageUpload(formData, newRentalId);
   };
-
-  const displayImages = () => {
-    const imageHtmlElems = [];
-
-    for (let i = 0; i < images.length; i++) {
-      imageHtmlElems.push(<img className="edit-images" src={URL.createObjectURL(images[i])} />)
-    }
-
-    return imageHtmlElems;
-  }
 
   const addRental = () => {
     const bodyRequest = {
@@ -67,27 +87,11 @@ function AddRental(props) {
       monthlyPrice: monthlyPrice,
     };
 
-    createRental(bodyRequest).then((result) => {
-      if (result) {
-        setRentalId(result.data.insertId);
-        setPostList([
-          ...postList,
-          {
-            brand: brand,
-            size: size,
-            material: material,
-            color: color,
-            description: description,
-            biweeklyPrice: biweeklyPrice,
-            monthlyPrice: monthlyPrice,
-          },
-        ]);
-      } 
-    });
+    return createRental(bodyRequest);
   };
 
   return (
-    <div className="Rent">
+    <div className="rent">
       {!nextStatus && (
         <div className="information">
           <Form>
@@ -226,35 +230,20 @@ function AddRental(props) {
           </Form>
         </div>
       )}
-      {nextStatus && (
-        <div className="images">
-          <Form>
-            <Form.Group as={Row} className="mb-3" controlId="formFileMultiple">
-              <Form.Label column sm={3}>
-                Add Pictures
-              </Form.Label>
-              <Col sm={6}>
-                <Form.Control
-                  type="file"
-                  accept=".jpg, .jpeg"
-                  name="sampleFile"
-                  multiple={true}
-                  onChange={(e) => setImages(e.target.files)}
-                />
-              </Col>
-            </Form.Group>
-            <div>
-              {images.length && displayImages()}
-            </div>
-
-            <Form.Group as={Row} className="mb-3">
-              <Col sm={{ span: 6, offset: 5 }}>
-                <Button className="butn" onClick={imageHandler}>Create</Button>
-              </Col>
-            </Form.Group>
-          </Form>
-        </div>
-      )}
+      {nextStatus &&
+        <Form>
+          <ImageUploader 
+            images={images}
+            setImages={setImages}
+            handleNewImagesDelete={handleNewImagesDelete}
+          />
+          <Form.Group as={Row} className="mb-3">
+            <Col sm={{ span: 3, offset: 9 }}>
+              <Button className="butn" onClick={handleCreateRental}>Create</Button>
+            </Col>
+          </Form.Group>
+        </Form>
+      }
     </div>
   );
 }

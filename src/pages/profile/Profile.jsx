@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { getAllRentalsForUser, deleteRental, editRental } from './api';
+import { getAllRentalsForUser, deleteRental, editRental, deleteImage } from './api';
 import DeleteModal from '../../components/DeleteModal';
 import EditModal from '../../components/EditModal';
-import { Card, CardColumns } from 'react-bootstrap';
+import { Card, CardColumns, Carousel } from 'react-bootstrap';
 
 function Profile(props) {
   const [userRentals, setUserRentalList] = useState([]);
@@ -46,26 +46,42 @@ function Profile(props) {
     });
   };
 
+  const handleDeleteImage = (imageId, rentalId) => {
+    deleteImage(imageId, rentalId);
+  }
+
   return (
     <div>
       {userRentals.map((rental, index) => {
         return (
           <CardColumns>
             <Card className="profile-card">
-              <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+              <Carousel className='carousel-wrapper-profile'>
+                {rental.images ? rental.images.map((image) => {
+                  return (
+                  
+                    <Carousel.Item interval={5000}>
+                      <img className="profile-img" src={'http://localhost:3001/' + rental.images[0].path} />
+                    </Carousel.Item>
+                  )
+                  }):
+                  <img variant="top" src="holder.js/100px160" />
+                }
+              </Carousel>
+              {/* <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                   <div class="carousel-item active">
-                    {rental.images ? <img className="profile-card-img" variant="top" src={'http://localhost:3001/' + rental.images[0]} /> :
+                    {rental.images ? <img className="profile-card-img" variant="top" src={'http://localhost:3001/' + rental.images[0].path} /> :
                       <Card.Img className="profile-card-img" variant="top" src="holder.js/100px160" />}
                   </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                 </a>
                 <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span className="carousel-control-next-icon" aria-hidden="true"></span>
                 </a>
-              </div>
+              </div> */}
               <Card.Body>
                 <Card.Title>{rental.brand}</Card.Title>
                 <Card.Text className="profile-card-detail">
@@ -74,7 +90,7 @@ function Profile(props) {
                   <p>Material: {rental.material}</p>
                   <p>Color: {rental.color}</p>
                   <p>Description: {rental.description}</p>
-                  <p>Biweekly Price: {rental.biweekly_price}</p>
+                  <p>Bi-weekly Price: {rental.biweekly_price}</p>
                   <p>Monthly Price: {rental.monthly_price}</p>
 
 
@@ -88,7 +104,7 @@ function Profile(props) {
 
 
                   <DeleteModal id={index} handleDeleteRental={() => handleDeleteRental(loggedUser.id, rental.id)} show={activeDeleteModal === index} onHide={hideActiveDeleteModal} />
-                  <EditModal id={index} rental={rental} userId={loggedUser.id} handleEditRental={handleEditRental} show={activeEditModal === index} onHide={hideActiveEditModal} />
+                  <EditModal id={index} rental={rental} userId={loggedUser.id} handleDeleteImage={handleDeleteImage} handleEditRental={handleEditRental} show={activeEditModal === index} onHide={hideActiveEditModal} />
 
                 </Card.Text>
               </Card.Body>

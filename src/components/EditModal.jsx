@@ -1,6 +1,7 @@
 import React from "react";
 import { Modal, Button, Form, Col, Row, FormControl } from 'react-bootstrap';
 import { useState } from "react";
+import IamgeUploader from './ImageUploader';
 
 function EditModal(props) {
   const [brand, setBrand] = useState(props.rental.brand);
@@ -10,7 +11,8 @@ function EditModal(props) {
   const [description, setDescription] = useState(props.rental.description);
   const [biweeklyPrice, setBiweeklyPrice] = useState(props.rental.biweekly_price);
   const [monthlyPrice, setMonthlyPrice] = useState(props.rental.monthly_price);
-  const [images, setImages] = useState(new FormData());
+  const [newImages, setNewImages] = useState([]);
+  const [oldImages, setOldImages] = useState(props.rental.images);
 
   const handleUpdate = () => {
     const updatedRental = {
@@ -25,6 +27,19 @@ function EditModal(props) {
 
     props.handleEditRental(props.userId, props.rental.id, updatedRental);
   };
+
+  const handleNewImagesDelete = (index) => {
+    const updatedNewImages = [...newImages];
+    updatedNewImages.splice(index, 1);
+    
+    setNewImages(updatedNewImages);
+  };
+
+  const handleDeleteImage = (imgObj) => {
+    props.handleDeleteImage(imgObj.id, props.rental.id);
+    const updatedOldImages = oldImages.filter(obj => obj.id !== imgObj.id);
+    setOldImages(updatedOldImages);
+  }
 
   return (
     <Modal {...props}>
@@ -80,7 +95,7 @@ function EditModal(props) {
 
           <Form.Group as={Row} className="mb-3" controlId="formHorizontalBrand">
             <Form.Label column sm={4}>
-              Biweekly Price:
+              Bi-weekly Price:
             </Form.Label>
             <Col sm={5}>
               <FormControl type="text" defaultValue={props.rental.biweekly_price} onChange={(e) => setBiweeklyPrice(e.target.value)} />
@@ -89,23 +104,20 @@ function EditModal(props) {
 
           <Form.Group as={Row} className="mb-3" controlId="formHorizontalBrand">
             <Form.Label column sm={4}>
-              Monthlt Price:
+              Monthly Price:
             </Form.Label>
             <Col sm={5}>
               <FormControl type="text" defaultValue={props.rental.monthly_price} onChange={(e) => setMonthlyPrice(e.target.value)} />
             </Col>
           </Form.Group>
           
-          <div>
-          { props.rental.images ? props.rental.images.map((image) => {
-              return (
-                <img className="edit-images" src={'http://localhost:3001/' + image} /> 
-              )
-            }) :
-            <img src="holder.js/100px160" />
-          }
-          </div>
-            
+          <IamgeUploader 
+            setImages={setNewImages}
+            images={newImages}
+            oldImages={oldImages}
+            handleDeleteImage={handleDeleteImage}
+            handleNewImagesDelete={handleNewImagesDelete}
+          />
         </Form>
       </Modal.Body>
       <Modal.Footer>

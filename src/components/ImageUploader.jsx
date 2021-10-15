@@ -1,16 +1,52 @@
-import React from 'react';
-import { useState } from "react";
+import React, {useEffect} from 'react';
+import { Form, Row, Col } from "react-bootstrap";
 
-function ImageUploader(event) {
-  const [previewVisible, setPreviewVisible] = useState(false);
-  const [previewImage, setPreviewImage] = useState('');
-  const [fileList ]
-  const file = event.target.files[0];
+function ImageUploader(props) {
+  const displayImages = () => {
+    const imageHtmlElems = [];
+
+    for (let i = 0; i < props.images.length; i++) {
+      imageHtmlElems.push(<div>
+        <img className="edit-images" src={URL.createObjectURL(props.images[i])} />
+        <a href="javascript:void(0)" onClick={() => props.handleNewImagesDelete(i)}><i className="bi-x-circle"></i></a>
+      </div>)
+    }
+
+    if (props.oldImages && props.oldImages.length) {
+      for (let i = 0; i < props.oldImages.length; i++) {
+        imageHtmlElems.push(<div>
+          <img className="edit-images" src={'http://localhost:3001/' + props.oldImages[i].path} />
+          <a href="javascript:void(0)" onClick={() => props.handleDeleteImage(props.oldImages[i])}><i className="bi-x-circle"></i></a>
+        </div>)
+      }
+    }
+
+
+    return imageHtmlElems;
+  }
+
+  const handleFileInput = (e) => {
+    props.setImages(Array.from(e.target.files))
+  }
 
   return (
-    <div className="image">
-      <input type="file" name="image" accept="image/*" multiple={false} onChange={imageHandler} />
-    </div>
+    <Form.Group as={Row} className="add-images" controlId="formFileMultiple">
+      <Form.Label column sm={3}>
+        Add Pictures
+      </Form.Label>
+      <Col sm={3}>
+        <Form.Control
+          type="file"
+          accept=".jpg, .jpeg"
+          name="sampleFile"
+          multiple={true}
+          onChange={(e) => handleFileInput(e)}
+        />
+      </Col>
+      <div as={Row} className="display-images">
+        {displayImages()}
+      </div>
+    </Form.Group>
   )
 }
 

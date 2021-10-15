@@ -101,6 +101,11 @@ h2.header {
   float: left;
 }
 
+.bi-x-circle {
+  color: #8D8741;
+  position: absolute;
+}
+
 
 /* Home Page */
 .card {
@@ -149,6 +154,7 @@ h2.header {
 /* Rental Detail Page */
 .carousel-wrapper {
   margin-top: 70px;
+  margin-left: 70px;
   width: 500px;
   height: 500px;
 }
@@ -158,7 +164,6 @@ h2.header {
   text-align: left;
   float: right;
   top: -520px;
-  left: -50px;
   width: 300px;
 }
 
@@ -166,13 +171,13 @@ h2.header {
   float: right;
   position: absolute;
   top: 220px;
-  right: 215px;
+  right: 165px;
   font-size: 50px;
   color:#8D8741;
 }
 
 .sr-only {
-  color: #BC986A;
+  color: #8D8741;
 }
 
 
@@ -180,11 +185,16 @@ h2.header {
 .profile-card {
   border: 2px solid #BC986A;
   float: left;
-  margin-right: 20px;
+  margin-right: 100px;
 }
 
-.profile-card-img {
-  width: 295px;
+.profile-img {
+  height: 300px;
+  width: 300px;
+}
+
+.carousel-wrapper-profile {
+  width: 420px;
   height: 300px;
 }
 
@@ -274,4 +284,14 @@ h2.header {
 
 .already-resgistered-signin:hover {
   color: #BC986A;
+}
+
+/* Add Images */
+.display-images {
+  align-items: center;
+  margin-top: 50px;
+}
+
+.add-images {
+  margin-top: 50px;
 }

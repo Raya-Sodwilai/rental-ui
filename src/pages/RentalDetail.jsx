@@ -17,7 +17,7 @@ function RentalDetail(props) {
         { rental.images ? rental.images.map((image) => {
             return (
               <Carousel.Item interval={5000}>
-                <img className="d-block w-100" src={'http://localhost:3001/' + image} /> 
+                <img className="d-block w-100" src={'http://localhost:3001/' + image.path} /> 
               </Carousel.Item>
             )
           }) :
@@ -27,12 +27,12 @@ function RentalDetail(props) {
       
       <Card.Title className="title">{rental.brand}</Card.Title>
       <Card className="card-body-detail">
-        <Card.Body>Brand: {rental.brand}</Card.Body>
+          <Card.Body>Brand: {rental.brand}</Card.Body>
           <Card.Body>Size: {rental.size}</Card.Body>
           <Card.Body>Material: {rental.material}</Card.Body>
           <Card.Body>Color: {rental.color}</Card.Body>
           <Card.Body>Description: {rental.description}</Card.Body>
-          <Card.Body>Biweekly Price: {rental.biweekly_price}</Card.Body>
+          <Card.Body>Bi-weekly Price: {rental.biweekly_price}</Card.Body>
           <Card.Body>Monthly Price: {rental.monthly_price}</Card.Body>
       </Card>
     </Container>

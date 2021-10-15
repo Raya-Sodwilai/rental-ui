@@ -11,6 +11,7 @@ import AddRental from './pages/add-rental/AddRental';
 import Reservations from './pages/Reservations';
 import RentalDetail from './pages/RentalDetail';
 import './App.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 function App() {
   const [loggedUser, setLoggedUser] = useState(null);
