@@ -25,7 +25,7 @@
 
   * Clone the repository with command ```$ git clone gitHub-URL-repository```
   * Open the repository on your computer in your text editor.
-  * Navigate to the terminal and cd into the ```_client_``` folder
+  * Navigate to the terminal and cd into the ```client``` folder
   * Run the command ```$npm install``` in order to install all the packeages that are required for this application.
   * After successfully installed the packages, run the command ```$npm build``` then ```$npm run start```
 
@@ -34,3 +34,9 @@
   * N/A
 
 ## License
+
+_MIT &copy; 2021 Raya Sodwilai_
+
+## Contact Information
+
+_sodwilai@pdx.edu_
